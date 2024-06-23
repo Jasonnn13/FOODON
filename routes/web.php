@@ -35,3 +35,7 @@ Route::get('/Home-Penerima', function () {
 Route::get('/Home-Donatur', function () {
     return view('Donatur.home-donatur');
 });
+
+Route::get('/List', function () {
+    return view('Donatur.product-list-donatur');
+});
