@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Product List</title>
-    <link rel="stylesheet" href="../css/product-list.css">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <!-- Inline CSS and external stylesheet links -->
+    <!-- CSS styles go here -->
 </head>
 <body>
+    <!-- Your existing HTML content -->
     <div class="container">
         <a href="../home-donatur" class="back-button"><<</a> <!-- Tanda back untuk kembali ke halaman semula -->
         <div class="content-container">
@@ -26,33 +24,37 @@
                         <i class="fi fi-rr-trash-xmark"></i>
                     </div>
                 </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit"></i>
-                        <i class="fi fi-rr-trash-xmark"></i>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit"></i>
-                        <i class="fi fi-rr-trash-xmark"></i>
-                    </div>
-                </div>
+                <!-- Additional products... -->
             </div>
         </div>
     </div>
-    <script src="product-list-donatur.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const actionButtons = document.querySelectorAll('.product-actions i.fi-rr-trash-xmark');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const confirmationBox = document.createElement('div');
+                    confirmationBox.classList.add('confirmation-box');
+                    confirmationBox.innerHTML = `
+                        <p>Apakah Anda yakin ingin menghapus produk ini?</p>
+                        <button id="confirm-yes">Iya</button>
+                        <button id="confirm-no">Tidak</button>
+                    `;
+                    document.body.appendChild(confirmationBox);
+
+                    document.getElementById('confirm-yes').addEventListener('click', function() {
+                        button.closest('.product').remove();
+                        document.body.removeChild(confirmationBox);
+                    });
+
+                    document.getElementById('confirm-no').addEventListener('click', function() {
+                        document.body.removeChild(confirmationBox);
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
