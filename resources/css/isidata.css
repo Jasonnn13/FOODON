@@ -1,0 +1,131 @@
+/* Impor font Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'); /* Flaticon */
+
+html {
+    font-size: 20px; /* 1rem akan sama dengan 20px untuk ukuran teks yang lebih besar */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem; /* Ukuran font 1.5 kali lipat */
+    background-color: #87CEEB;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: black; /* Ubah ke hitam untuk label */
+    overflow-y: auto; /* Menambahkan scroll vertikal */
+}
+
+.container {
+    width: 100%;
+    max-width: 45rem; /* 45rem adalah 720px jika ukuran root font adalah 16px */
+    padding: 2rem; /* Kurangi padding untuk lebih rapat */
+    box-sizing: border-box;
+    border-radius: 1rem; /* Menambahkan border-radius */
+    background-color: rgba(255, 255, 255, 0.1); /* Membuat latar belakang kontainer sedikit transparan */
+    text-align: left; /* Teks rata kiri */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 3rem; /* Meningkatkan jarak bawah dua kali lipat */
+    font-size: 4rem; /* Menyesuaikan ukuran font */
+    color: white; /* Tetap putih untuk kontras */
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem; /* Meningkatkan gap lebih besar */
+    text-align: left; /* Teks rata kiri */
+}
+
+label {
+    font-size: 1.5rem; /* Ukuran font untuk label */
+    color: black; /* Warna font hitam untuk label */
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea {
+    width: 100%;
+    padding: 1.125rem; /* Meningkatkan padding */
+    margin: 0.5rem 0; /* Meningkatkan margin */
+    border: none;
+    border-radius: 0.5rem; /* Menyesuaikan border-radius */
+    box-sizing: border-box;
+    font-size: 1.5rem; /* Menyesuaikan ukuran font */
+    opacity: 80%;
+}
+
+textarea {
+    height: 9rem; /* Tinggi untuk textarea */
+    padding: 1.5rem; /* Menambah padding untuk textarea */
+}
+
+.custom-file-input {
+    display: none; /* Sembunyikan input file asli */
+}
+
+.custom-file-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Rata kiri */
+    width: 100%;
+    padding: 1.125rem; /* Meningkatkan padding */
+    margin: 0.5rem 0; /* Meningkatkan margin */
+    border: none;
+    border-radius: 0.5rem; /* Menyesuaikan border-radius */
+    box-sizing: border-box;
+    font-size: 1.5rem; /* Menyesuaikan ukuran font */
+    background-color: rgba(0, 0, 0, 0.3); /* Warna hitam dengan opacity 30% */
+    color: white;
+    cursor: pointer;
+    opacity: 80%;
+    text-align: left;
+}
+
+.custom-file-label.photo {
+    height: 20rem; /* Tinggi lebih besar */
+    width: 50%; /* Lebar 50% */
+    border-radius: 50%; /* Radius border untuk lingkaran */
+    padding: 2rem; /* Menambah padding untuk kesesuaian visual */
+    display: flex;
+    flex-direction: column; /* Susun vertikal */
+    align-items: center; /* Rata tengah secara horizontal */
+    justify-content: center; /* Rata tengah secara vertikal */
+}
+
+.custom-file-label.photo i {
+    font-size: 4rem; /* Perbesar ikon dua kali lipat */
+    margin-bottom: 1rem; /* Tambahkan jarak bawah */
+}
+
+button {
+    width: 100%;
+    padding: 1.125rem; /* Meningkatkan padding */
+    border: none;
+    border-radius: 0.5rem; /* Menyesuaikan border-radius */
+    background-color: #000; /* Tombol warna hitam */
+    color: #fff;
+    font-size: 1.5rem; /* Menyesuaikan ukuran font */
+    cursor: pointer;
+    margin: 0.5rem 0; /* Meningkatkan margin */
+    transition: transform 0.2s; /* Menambahkan transisi untuk animasi */
+}
+
+button:hover {
+    transform: scale(1.05); /* Memperbesar tombol saat dihover */
+}
+
+button:active {
+    transform: scale(0.95); /* Mengecilkan tombol saat diklik */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.5rem; /* Menambahkan jarak antara tombol lebih besar */
+}

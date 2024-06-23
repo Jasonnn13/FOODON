@@ -1,0 +1,115 @@
+/* Impor font Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'); /* Flaticon */
+
+/* Terapkan font Poppins dan ubah ukuran font */
+html {
+    font-size: 18px; /* 1rem akan sama dengan 18px untuk ukuran teks yang lebih besar */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.25rem; /* 0.25 kali lebih besar */
+    background-color: #87CEEB;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 45rem; /* 45rem adalah 720px jika ukuran root font adalah 16px */
+    padding: 3rem; /* Menambahkan lebih banyak padding */
+    box-sizing: border-box;
+    border-radius: 1rem; /* Menambahkan border-radius */
+    background-color: rgba(255, 255, 255, 0.1); /* Membuat latar belakang kontainer sedikit transparan */
+    text-align: center; /* Center text inside container */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem; /* Meningkatkan jarak bawah */
+    font-size: 4.5rem; /* Menyesuaikan ukuran font */
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="file"], textarea {
+    width: 100%;
+    padding: 1.125rem; /* Meningkatkan padding */
+    margin: 1.5rem 0; /* Meningkatkan margin */
+    border: none;
+    border-radius: 0.5rem; /* Menyesuaikan border-radius */
+    box-sizing: border-box;
+    font-size: 1.75rem; /* Menyesuaikan ukuran font */
+    opacity: 80%;
+}
+
+button {
+    width: 100%;
+    padding: 1.125rem; /* Meningkatkan padding */
+    border: none;
+    border-radius: 1rem; /* Menyesuaikan border-radius */
+    background-color: #ffffff;
+    color: #000;
+    font-size: 1.75rem; /* Menyesuaikan ukuran font */
+    cursor: pointer;
+    margin: 1.5rem 0; /* Meningkatkan margin */
+    transition: transform 0.2s; /* Menambahkan transisi untuk animasi */
+}
+
+button:hover {
+    transform: scale(1.05); /* Memperbesar tombol saat dihover */
+}
+
+button:active {
+    transform: scale(0.95); /* Mengecilkan tombol saat diklik */
+}
+
+button.pilihan {
+    background-color: #ffffff;
+    color: #000;
+    font-size: 2.25rem; /* Ukuran font lebih besar */
+    margin: 1rem 0; /* Margin antara tombol */
+}
+
+button.social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b5998; /* Facebook blue */
+    color: #fff;
+}
+
+button.social.google {
+    background-color: #ffffff; /* Google white */
+    color: #000; /* Ubah teks tombol Google menjadi hitam */
+}
+
+button.social i {
+    margin-right: 1rem; /* Jarak antara ikon dan teks */
+    font-size: 2rem; /* Ukuran ikon */
+}
+
+button.social + button.social {
+    margin-top: 1.5rem; /* Meningkatkan margin-top */
+}
+
+p {
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.75rem; /* Menyesuaikan ukuran font */
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.75rem; /* Menyesuaikan ukuran font */
+}
+
+/* Tambahkan kelas untuk teks hitam */
+.black-text {
+    color: #000 !important;
+}
