@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('preload');
 });
 
 Route::get('/Home', function () {
@@ -38,4 +38,12 @@ Route::get('/Home-Donatur', function () {
 
 Route::get('/List', function () {
     return view('Donatur.product-list-donatur');
+});
+
+Route::get('/Signin', function () {
+    return view('sign-in');
+});
+
+Route::get('/Signup', function () {
+    return view('sign-up');
 });

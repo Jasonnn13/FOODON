@@ -47,7 +47,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
-                window.location.href = '../sign-in/sign-in.php';
+                window.location.href = '/Signin';
             }, 5000); // Menunggu 5 detik sebelum dialihkan ke sign-in.php
         });
     </script>
