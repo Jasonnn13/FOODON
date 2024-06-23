@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,36 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('preload');
+    return view('welcome');
 });
 
-Route::get('/Home', function () {
-    return view('pilihan-masuk');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/Donatur', function () {
-    return view('Donatur.data-donatur');
-});
-
-Route::get('/Penerima', function () {
-    return view('Penerima.data-penerima');
-});
-
-Route::get('/Home-Penerima', function () {
-    return view('Penerima.home-pengguna');
-});
-Route::get('/Home-Donatur', function () {
-    return view('Donatur.home-donatur');
-});
-
-Route::get('/List', function () {
-    return view('Donatur.product-list-donatur');
-});
-
-Route::get('/Signin', function () {
-    return view('sign-in');
-});
-
-Route::get('/Signup', function () {
-    return view('sign-up');
-});
+require __DIR__.'/auth.php';
