@@ -148,40 +148,27 @@
                 window.location.href = '/Home';
             });
 
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const nama = document.getElementById('nama').value;
-                const siup = document.getElementById('siup').files[0];
-                const alamat = document.getElementById('alamat').value;
-                const foto = document.getElementById('foto').files[0];
-                const deskripsi = document.getElementById('deskripsi').value;
-
-                if (!nama || !siup || !alamat || !foto || !deskripsi) {
-                    alert('Semua bidang harus diisi.');
-                    return;
-                }
-
-                alert('Data berhasil dikirim!');
-            });
-
             const customFileInputs = document.querySelectorAll('.custom-file-input');
             customFileInputs.forEach(input => {
                 input.addEventListener('change', function() {
                     const label = input.previousElementSibling;
                     const fileName = input.files[0] ? input.files[0].name : 'Pilih gambar';
-                    label.textContent = fileName;
-                    label.insertAdjacentHTML('afterbegin', '<i class="fas fa-cloud-upload-alt"></i> ');
+                    label.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> ' + fileName;
                 });
             });
 
             const buttons = document.querySelectorAll('button');
             buttons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('mousedown', function() {
                     button.classList.add('clicked');
+                });
+                button.addEventListener('mouseup', function() {
                     setTimeout(() => {
                         button.classList.remove('clicked');
                     }, 200);
+                });
+                button.addEventListener('mouseleave', function() {
+                    button.classList.remove('clicked');
                 });
             });
         });
@@ -190,21 +177,27 @@
 <body>
     <div class="container">
         <h1>Lengkapi Data Perusahaan Anda</h1>
-        <form id="donatur-form">
-            <label for="nama">Nama perusahaan:</label>
-            <input type="text" id="nama" placeholder="Masukkan nama perusahaan" required>
-            <label for="siup" class="custom-file-label">
-                <i class="fas fa-cloud-upload-alt"></i>SIUP (Surat Izin Usaha Perdagangan)
+        <form id="donatur-form" action="{{ route('donatur.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label for="nama_perusahaan">Nama perusahaan:</label>
+            <input type="text" id="nama_perusahaan" name="nama_perusahaan" placeholder="Masukkan nama perusahaan" required>
+            
+            <label for="siup_foto" class="custom-file-label">
+                <i class="fas fa-cloud-upload-alt"></i> SIUP (Surat Izin Usaha Perdagangan)
             </label>
-            <input type="file" id="siup" class="custom-file-input" accept="image/*" required>
-            <label for="alamat">Alamat Perusahaan:</label>
-            <input type="text" id="alamat" placeholder="Masukkan alamat" required>
-            <label for="foto" class="custom-file-label photo">
-                <i class="fas fa-cloud-upload-alt"></i>Foto profil
+            <input type="file" id="siup_foto" name="siup_foto" class="custom-file-input" accept="image/*" required>
+            
+            <label for="alamat_perusahaan">Alamat Perusahaan:</label>
+            <input type="text" id="alamat_perusahaan" name="alamat_perusahaan" placeholder="Masukkan alamat" required>
+            
+            <label for="lokasi_foto" class="custom-file-label photo">
+                <i class="fas fa-cloud-upload-alt"></i> Foto profil
             </label>
-            <input type="file" id="foto" class="custom-file-input" accept="image/*" required>
+            <input type="file" id="lokasi_foto" name="lokasi_foto" class="custom-file-input" accept="image/*" required>
+            
             <label for="deskripsi">Deskripsi perusahaan:</label>
-            <textarea id="deskripsi" placeholder="Masukkan deskripsi" required></textarea>
+            <textarea id="deskripsi" name="deskripsi" placeholder="Masukkan deskripsi" required></textarea>
+            
             <div class="button-group">
                 <button type="button" id="kembali">Kembali</button>
                 <button type="submit">Lanjut</button>
