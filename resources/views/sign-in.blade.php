@@ -10,9 +10,6 @@
     <div class="container" style="width: 100%; max-width: 45rem; padding: 3rem; box-sizing: border-box; border-radius: 1rem; background-color: rgba(255, 255, 255, 0.1); text-align: center;">
         <h1 style="text-align: center; margin-bottom: 2rem; font-size: 4.5rem;">Masuk</h1>
         
-        <!-- Session Status -->
-        <!-- Remove x-auth-session-status and replace with custom status display if needed -->
-
         <form method="POST" action="{{ route('login') }}">  
             @csrf
 
@@ -39,19 +36,25 @@
                     <span class="ms-2 text-sm text-gray-600" style="margin-left: 0.5rem; font-size: 1.75rem;">{{ __('Remember me') }}</span>
                 </label>
             </div>
-            <button type="submit" style="width: 100%; padding: 1.125rem; border: none; border-radius: 1rem; background-color: #ffffff; color: #000; font-size: 1.75rem; cursor: pointer; margin: 1.5rem 0; transition: transform 0.2s;  ">
-                    {{ __('Log in') }}
-                </button>
+
+            <!-- Submit Button -->
+            <button type="submit" style="width: 100%; padding: 1.125rem; border: none; border-radius: 1rem; background-color: #ffffff; color: #000; font-size: 1.75rem; cursor: pointer; margin: 1.5rem 0; transition: transform 0.2s;">{{ __('Log in') }}</button>
         </form>
 
         <hr style="margin: 2rem 0; border: none; border-top: 1px solid #fff;">
 
+        <!-- Social Login Buttons -->
         <button class="social" onclick="loginWithFacebook()" style="display: flex; align-items: center; justify-content: center; background-color: #3b5998; color: #fff; width: 100%; padding: 1.125rem; border: none; border-radius: 1rem; font-size: 1.75rem; cursor: pointer; margin: 1.5rem 0; transition: transform 0.2s;">
             <i class="fi fi-brands-facebook" style="margin-right: 1rem; font-size: 2rem;"></i> Masuk dengan Facebook
         </button>
         <button class="social google" onclick="loginWithGoogle()" style="display: flex; align-items: center; justify-content: center; background-color: #ffffff; color: #000; width: 100%; padding: 1.125rem; border: none; border-radius: 1rem; font-size: 1.75rem; cursor: pointer; margin: 1.5rem 0; transition: transform 0.2s;">
             <i class="fi fi-brands-google" style="margin-right: 1rem; font-size: 2rem;"></i> Masuk dengan Google
         </button>
+
+        <!-- Register Link -->
+        <div class="mt-4">
+            <a href="/Signup" style="font-size: 1.75rem; color: #fff; text-decoration: underline;">Belum punya akun? Daftar di sini</a>
+        </div>
     </div>
 
     <script>
