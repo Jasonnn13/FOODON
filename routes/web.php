@@ -44,6 +44,10 @@ Route::get('/List', function () {
     return view('Donatur.product-list-donatur');
 });
 
+Route::get('/product-list-donatur', function () {
+    return view('donatur.product-list-donatur');
+})->name('product-list-donatur');
+
 Route::get('/Signin', function () {
     return view('sign-in');
 });

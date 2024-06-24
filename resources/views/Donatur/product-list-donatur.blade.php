@@ -190,5 +190,39 @@
             });
         });
     </script>
+    <script>
+        fetch('/api/products')
+    .then(response => response.json())
+    .then(data => {
+        // Data produk diterima dari API
+        console.log(data);
+
+        // Proses data untuk ditampilkan di halaman web
+        const productContainer = document.querySelector('.product-list');
+
+        data.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+
+            productElement.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <div class="product-info">
+                    <h2>${product.name}</h2>
+                    <p>Best Before: ${product.best_before}</p>
+                    <p>Stock: ${product.stock} buah</p>
+                </div>
+                <div class="product-actions">
+                    <i class="fi fi-rr-file-edit"></i>
+                    <i class="fi fi-rr-trash-xmark"></i>
+                </div>
+            `;
+
+            productContainer.appendChild(productElement);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching products:', error);
+    });
+    </script>
 </body>
 </html>

@@ -285,7 +285,7 @@
                     </div>
                 </div>
             </div>
-            <a href="../product-list-donatur/product-list-donatur.php" class="see-more">Lihat produk lain</a>
+            <a href="{{ route('product-list-donatur') }}" class="see-more">Lihat produk lain</a>
         </div>
     </div>
     <script>
