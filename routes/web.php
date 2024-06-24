@@ -4,7 +4,7 @@ use App\Http\Controllers\DonaturController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenerimaController;
 
-
+require __DIR__.'/auth.php'; // Ensure this line is present
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +54,4 @@ Route::get('/Signup', function () {
 
 Route::resource('donatur', DonaturController::class);
 Route::resource('penerima', PenerimaController::class);
+
