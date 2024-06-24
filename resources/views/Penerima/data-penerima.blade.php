@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Data Penerima</title>
-    <link rel="stylesheet" href="../css/isidata.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
@@ -55,7 +54,7 @@
             color: black;
         }
 
-        input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea {
+        input[type="text"], input[type="number"], textarea {
             width: 100%;
             padding: 1.125rem;
             margin: 0.5rem 0;
@@ -135,17 +134,17 @@
             justify-content: space-between;
             gap: 2.5rem;
         }
+
+        .clicked {
+            transform: scale(0.95);
+        }
     </style>
-    <script>
+    <script defer>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('penerima-form');
             const kembaliButton = document.getElementById('kembali');
-            const submitButton = document.getElementById('submit');
-
             
-
             form.addEventListener('submit', function(event) {
-                event.preventDefault();
 
                 const username = document.getElementById('username').value;
                 const nama = document.getElementById('nama').value;
@@ -164,8 +163,6 @@
                     return;
                 }
 
-                alert('Data berhasil dikirim!');
-
                 const formData = new FormData();
                 formData.append('username', username);
                 formData.append('nama', nama);
@@ -174,34 +171,27 @@
                 formData.append('alamat', alamat);
                 formData.append('foto', foto);
 
-                fetch('https://example.com/api/penerima', {
+                fetch('{{ route('penerima.store') }}', {
                     method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
                     body: formData
-                }).then(response => response.json())
-                  .then(data => {
-                      console.log(data);
-                  })
-                  .catch(error => {
-                      console.error('Error:', error);
-                  });
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    alert('Data berhasil dikirim!');
+                    window.location.href = '/Home-Penerima';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat mengirim data');
+                });
             });
 
             kembaliButton.addEventListener('click', function() {
                 window.location.href = '/Home';
-            });
-
-            submitButton.addEventListener('click', function() {
-                window.location.href = '/Home-Penerima';
-            });
-
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    button.classList.add('clicked');
-                    setTimeout(() => {
-                        button.classList.remove('clicked');
-                    }, 200);
-                });
             });
 
             const customFileInputs = document.querySelectorAll('.custom-file-input');
@@ -212,30 +202,52 @@
                     label.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> ' + fileName;
                 });
             });
+
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mousedown', function() {
+                    button.classList.add('clicked');
+                });
+                button.addEventListener('mouseup', function() {
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                    }, 200);
+                });
+                button.addEventListener('mouseleave', function() {
+                    button.classList.remove('clicked');
+                });
+            });
         });
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>Lengkapi Data Diri Anda</h1>
-        <form id="penerima-form">
+        <h1>Lengkapi Data Penerima</h1>
+        <form id="penerima-form" action="{{ route('penerima.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Masukkan username anda" required>
+            <input type="text" id="username" name="username" placeholder="Masukkan username anda" required>
+            
             <label for="nama">Nama lengkap:</label>
-            <input type="text" id="nama" placeholder="Masukkan nama lengkap anda" required>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap anda" required>
+            
             <label for="umur">Umur:</label>
-            <input type="number" id="umur" placeholder="Masukkan umur anda" required>
+            <input type="number" id="umur" name="umur" placeholder="Masukkan umur anda" required>
+            
             <label for="stkm" class="custom-file-label">
-                <i class="fas fa-cloud-upload-alt"></i>STKM (Surat Keterangan Tidak Mampu)
+                <i class="fas fa-cloud-upload-alt"></i> STKM (Surat Keterangan Tidak Mampu)
             </label>
-            <input type="file" id="stkm" class="custom-file-input" accept="image/*" required>
+            <input type="file" id="stkm" name="stkm" class="custom-file-input" accept="image/*" required>
+            
             <label for="alamat">Alamat tempat tinggal:</label>
-            <input type="text" id="alamat" placeholder="Masukkan alamat" required>
+            <input type="text" id="alamat" name="alamat" placeholder="Masukkan alamat" required>
+            
             <label for="foto" class="custom-file-label photo">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <span>Foto profil</span>
             </label>
-            <input type="file" id="foto" class="custom-file-input" accept="image/*" required>
+            <input type="file" id="foto" name="foto" class="custom-file-input" accept="image/*" required>
+            
             <div class="button-group">
                 <button type="button" id="kembali">Kembali</button>
                 <button type="submit">Lanjut</button>
