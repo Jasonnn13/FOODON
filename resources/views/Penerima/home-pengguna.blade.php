@@ -236,12 +236,11 @@
                             <p><strong>{{ $donationItem->lokasi_pengambilan }}</strong></p>
                             <p>Best Before: {{ $donationItem->tanggal_kadaluwarsa }}</p>
                             <p>Stock: {{ $donationItem->jumlah }}</p>
-                            <p>Status: {{ $donationItem->status }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
-            <a href="#" class="see-more">Lihat produk lain</a>
+            <a href="{{ route('product-list-penerima') }}" class="see-more">Lihat produk lain</a>
         </div>
     </div>
     <script>

@@ -248,42 +248,20 @@
                 <input type="text" placeholder="Search">
             </div>
             <div class="product-list">
+                @foreach($posts as $post)
                 <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
+                    <img src="{{$post->foto}}" alt="Apel Fuji">
                     <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
+                        <h2>{{$post->nama}}</h2>
+                        <p>Best Before: {{$post->tanggal_kadaluwarsa}}</p>
+                        <p>Stock: {{$post->jumlah}} buah</p>
                     </div>
                     <div class="product-actions">
-                        <i class="fi fi-rr-file-edit" onclick="animateButton(this)"></i>
-                        <i class="fi fi-rr-trash-xmark" onclick="deleteProduct(this)"></i>
+                        <i class="fi fi-rr-file-edit"></i>
+                        <i class="fi fi-rr-trash-xmark"></i>
                     </div>
                 </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit" onclick="animateButton(this)"></i>
-                        <i class="fi fi-rr-trash-xmark" onclick="deleteProduct(this)"></i>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit" onclick="animateButton(this)"></i>
-                        <i class="fi fi-rr-trash-xmark" onclick="deleteProduct(this)"></i>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <a href="{{ route('product-list-donatur') }}" class="see-more">Lihat produk lain</a>
         </div>

@@ -122,50 +122,22 @@
 </head>
 <body>
     <div class="container">
-        <a href="/Home-Donatur" class="back-button"><<</a>
+        <a href="/Home-Penerima" class="back-button"><<</a>
         <div class="content-container">
-            @foreach($posts as $post)
             <div class="product-list">
-                <div class="product">
-                    <img src="{{$post->foto}}" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>{{$post->nama}}</h2>
-                        <p>Best Before: {{$post->tanggal_kadaluwarsa}}</p>
-                        <p>Stock: {{$post->jumlah}} buah</p>
+                @foreach($posts as $donationItem)
+                    <div class="product">
+                        <img src="{{ asset($donationItem->foto) }}" alt="{{ $donationItem->nama }}">
+                        <div class="product-info">
+                            <h2>{{ $donationItem->nama }}</h2>
+                            <p><strong>{{ $donationItem->lokasi_pengambilan }}</strong></p>
+                            <p>Best Before: {{ $donationItem->tanggal_kadaluwarsa }}</p>
+                            <p>Stock: {{ $donationItem->jumlah }}</p>
+                        </div>
                     </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit"></i>
-                        <i class="fi fi-rr-trash-xmark"></i>
-                    </div>
-                </div>
-                <!-- <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit"></i>
-                        <i class="fi fi-rr-trash-xmark"></i>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit"></i>
-                        <i class="fi fi-rr-trash-xmark"></i>
-                    </div>
-                </div> -->
+                @endforeach
             </div>
-            @endforeach
         </div>
-    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const actionButtons = document.querySelectorAll('.product-actions i.fi-rr-trash-xmark');

@@ -45,16 +45,40 @@ Route::get('/Home-Penerima', function () {
 });
 
 Route::get('/Home-Donatur', function () {
-    return view('Donatur.home-donatur');
+    $posts = DB::table('donation_items')->get();
+    return view('Donatur.home-donatur',[
+    'posts' => $posts
+    ]);
 });
 
 Route::get('/List', function () {
     return view('Donatur.product-list-donatur');
 });
 
+// Route::get('/product-list-donatur', function () {
+//     return view('Donatur.product-list-donatur');
+// })->name('product-list-donatur');
+
+// Route::get('/product-list-donatur', function () {
+//     $posts = DB::table('donation_items')->get();
+//     return view('Donatur.product-list-donatur',[
+//         'posts' => $posts
+//     ]);
+// });
+
 Route::get('/product-list-donatur', function () {
-    return view('donatur.product-list-donatur');
+    $posts = DB::table('donation_items')->get();
+    return view('Donatur.product-list-donatur',[
+        'posts' => $posts
+    ]);
 })->name('product-list-donatur');
+
+Route::get('/product-list-penerima', function () {
+    $posts = DB::table('donation_items')->get();
+    return view('Penerima.product-list-penerima',[
+        'posts' => $posts
+    ]);
+})->name('product-list-penerima');
 
 Route::get('/Signin', function () {
     return view('sign-in');
