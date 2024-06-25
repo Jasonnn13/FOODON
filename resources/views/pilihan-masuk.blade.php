@@ -41,17 +41,6 @@
             font-size: 4.5rem; /* Adjusting font size */
         }
 
-        input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="file"], textarea {
-            width: 100%;
-            padding: 1.125rem; /* Increasing padding */
-            margin: 1.5rem 0; /* Increasing margin */
-            border: none;
-            border-radius: 0.5rem; /* Adjusting border-radius */
-            box-sizing: border-box;
-            font-size: 1.75rem; /* Adjusting font size */
-            opacity: 80%;
-        }
-
         button {
             width: 100%;
             padding: 1.125rem; /* Increasing padding */
@@ -80,28 +69,6 @@
             margin: 1rem 0; /* Margin between buttons */
         }
 
-        button.social {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #3b5998; /* Facebook blue */
-            color: #fff;
-        }
-
-        button.social.google {
-            background-color: #ffffff; /* Google white */
-            color: #000; /* Change Google button text to black */
-        }
-
-        button.social i {
-            margin-right: 1rem; /* Spacing between icon and text */
-            font-size: 2rem; /* Icon size */
-        }
-
-        button.social + button.social {
-            margin-top: 1.5rem; /* Increasing margin-top */
-        }
-
         p {
             text-align: center;
             color: #ffffff;
@@ -122,37 +89,15 @@
             transform: scale(0.95); /* Animation for clicked button */
         }
     </style>
-    <!-- Inline JavaScript -->
-    <script defer>
-        document.addEventListener('DOMContentLoaded', function() {
-            const donaturButton = document.getElementById('donatur');
-            const penerimaButton = document.getElementById('penerima');
-
-            donaturButton.addEventListener('click', function() {
-                window.location.href = '/Donatur';
-            });
-
-            penerimaButton.addEventListener('click', function() {
-                window.location.href = '/Penerima';
-            });
-            // Animation on button click
-            const buttons = document.querySelectorAll('.pilihan');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    button.classList.add('clicked');
-                    setTimeout(() => {
-                        button.classList.remove('clicked');
-                    }, 200);
-                });
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="container">
         <h1>Masuk sebagai :</h1>
-        <button class="pilihan" id="donatur">Donatur</button>
-        <button class="pilihan" id="penerima">Penerima</button>
+        <form action="{{ route('check.user.type') }}" method="POST">
+            @csrf
+            <button type="submit" class="pilihan" name="type" value="donatur">Donatur</button>
+            <button type="submit" class="pilihan" name="type" value="penerima">Penerima</button>
+        </form>
     </div>
 </body>
 </html>

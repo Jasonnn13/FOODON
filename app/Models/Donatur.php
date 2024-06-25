@@ -17,5 +17,11 @@ class Donatur extends Model
         'alamat_perusahaan',
         'lokasi_foto',
         'deskripsi',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

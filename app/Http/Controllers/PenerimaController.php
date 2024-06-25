@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penerima;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PenerimaController extends Controller
@@ -13,7 +14,7 @@ class PenerimaController extends Controller
     public function index()
     {
         $penerimas = Penerima::all();
-        return view('penerima.home-penerima', compact('penerimas'));
+        return view('Penerima.home-pengguna', compact('penerimas'));
     }
 
     /**
@@ -28,32 +29,38 @@ class PenerimaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'username' => 'required|string|max:255',
-            'nama_lengkap' => 'required|string|max:255',
-            'umur' => 'required|integer|min:1',
-            'stkm_foto' => 'required|file|image|max:2048',
-            'alamat' => 'required|string|max:255',
-            'foto_profil' => 'required|file|image|max:2048',
-        ]);
+{
+    $request->validate([
+        'username' => 'required|string|max:255',
+        'nama_lengkap' => 'required|string|max:255',
+        'umur' => 'required|integer|min:1',
+        'stkm_foto' => 'required|file|image|max:2048',
+        'alamat' => 'required|string|max:255',
+        'foto_profil' => 'required|file|image|max:2048',
+    ]);
 
-        // Handle file uploads
-        $stkmFotoPath = $request->file('stkm_foto')->store('stkm_fotos', 'public');
-        $fotoProfilPath = $request->file('foto_profil')->store('foto_profils', 'public');
+    // Handle file uploads
+    $stkmFotoPath = $request->file('stkm_foto')->store('stkm_fotos', 'public');
+    $fotoProfilPath = $request->file('foto_profil')->store('foto_profils', 'public');
 
-        // Create Penerima
-        $penerima = Penerima::create([
-            'username' => $request->username,
-            'nama_lengkap' => $request->nama_lengkap,
-            'umur' => $request->umur,
-            'stkm_foto' => $stkmFotoPath,
-            'alamat' => $request->alamat,
-            'foto_profil' => $fotoProfilPath,
-        ]);
+    // Create Penerima
+    $penerima = Penerima::create([
+        'user_id' => auth()->id(), // Associate with authenticated user
+        'username' => $request->username,
+        'nama_lengkap' => $request->nama_lengkap,
+        'umur' => $request->umur,
+        'stkm_foto' => $stkmFotoPath,
+        'alamat' => $request->alamat,
+        'foto_profil' => $fotoProfilPath,
+    ]);
 
-        return redirect()->route('penerima.index')->with('success', 'Data Penerima created successfully.');
-    }
+    // Update 'penerima' column in 'users' table
+    $user = User::find(auth()->id());
+    $user->penerima = 1;
+    $user->save();
+
+    return redirect()->route('penerima.index')->with('success', 'Data Penerima created successfully.');
+}
 
     /**
      * Display the specified resource.

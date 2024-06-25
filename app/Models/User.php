@@ -21,6 +21,8 @@ class User extends Authenticatable
         'nomor',
         'email',
         'password',
+        'penerima',
+        'donatur',
     ];
 
     /**
@@ -42,4 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function donatur()
+    {
+        return $this->hasOne(Donatur::class);
+    }
+
+    public function penerima()
+    {
+        return $this->hasOne(Penerima::class);
+    }
 }

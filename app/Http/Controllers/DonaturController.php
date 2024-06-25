@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donatur;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DonaturController extends Controller
 {
@@ -43,6 +44,7 @@ class DonaturController extends Controller
 
     // Create Donatur
     $donatur = Donatur::create([
+        'user_id' => auth()->id(), // Associate with authenticated user
         'nama_perusahaan' => $request->nama_perusahaan,
         'siup_foto' => $siupFotoPath,
         'alamat_perusahaan' => $request->alamat_perusahaan,
@@ -50,6 +52,10 @@ class DonaturController extends Controller
         'deskripsi' => $request->deskripsi,
     ]);
 
+    $user = User::find(auth()->id());
+    $user->donatur = 1;
+    $user->save();
+    
     return redirect()->route('donatur.index')->with('success', 'Donatur created successfully.');
 }
 

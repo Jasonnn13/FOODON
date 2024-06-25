@@ -12,8 +12,11 @@ class DonationItemController extends Controller
      */
     public function index()
     {
+        // Retrieve all donation items
         $donationItems = DonationItem::all();
-        return response()->json($donationItems);
+
+        // Pass donation items to the view
+        return view('Penerima.home-pengguna', compact('donationItems'));
     }
 
     /**
@@ -33,8 +36,7 @@ class DonationItemController extends Controller
 
         // Handle the file upload for the 'foto' field
         if ($request->hasFile('foto')) {
-            $fileName = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $path = $request->file('foto')->storeAs('images', $fileName, 'public');
+            $path = $request->file('foto')->store('images', 'public');
             $validatedData['foto'] = '/storage/' . $path;
         }
 
@@ -59,24 +61,32 @@ class DonationItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'nama' => 'sometimes|required|string|max:255',
             'lokasi_pengambilan' => 'sometimes|required|string',
             'tanggal_kadaluwarsa' => 'sometimes|required|date',
             'jumlah' => 'sometimes|required|integer',
-            'foto' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'sometimes|required|integer',
         ]);
 
+        // Find the donation item
+        $donationItem = DonationItem::findOrFail($id);
+
+        // Update the donation item with validated data
+        $donationItem->fill($validatedData);
+
+        // Handle the file upload for the 'foto' field if provided
         if ($request->hasFile('foto')) {
-            $fileName = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $path = $request->file('foto')->storeAs('images', $fileName, 'public');
-            $validatedData['foto'] = '/storage/' . $path;
+            $path = $request->file('foto')->store('images', 'public');
+            $donationItem->foto = '/storage/' . $path;
         }
 
-        $donationItem = DonationItem::findOrFail($id);
-        $donationItem->update($validatedData);
+        // Save the updated donation item
+        $donationItem->save();
 
+        // Return JSON response
         return response()->json($donationItem);
     }
 

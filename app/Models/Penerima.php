@@ -13,10 +13,16 @@ class Penerima extends Model
 
     protected $fillable = [
         'username',
-        'name_lengkap',
+        'nama_lengkap',
         'umur',
         'sktm_foto',
         'alamat',
         'foto_profil',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

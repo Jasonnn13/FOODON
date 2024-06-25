@@ -139,67 +139,14 @@
             transform: scale(0.95);
         }
     </style>
-    <script defer>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('penerima-form');
-            const kembaliButton = document.getElementById('kembali');
-            
-            form.addEventListener('submit', function(event) {
-
-                const username = document.getElementById('username').value;
-                const nama = document.getElementById('nama').value;
-                const umur = document.getElementById('umur').value;
-                const stkm = document.getElementById('stkm').files[0];
-                const alamat = document.getElementById('alamat').value;
-                const foto = document.getElementById('foto').files[0];
-
-                if (!username || !nama || !umur || !stkm || !alamat || !foto) {
-                    alert('Semua kolom harus diisi');
-                    return;
-                }
-
-                if (isNaN(umur) || umur <= 0) {
-                    alert('Umur harus diisi dengan angka yang valid');
-                    return;
-                }
-
-                const formData = new FormData();
-                formData.append('username', username);
-                formData.append('nama', nama);
-                formData.append('umur', umur);
-                formData.append('stkm', stkm);
-                formData.append('alamat', alamat);
-                formData.append('foto', foto);
-
-                fetch('{{ route('penerima.store') }}', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    alert('Data berhasil dikirim!');
-                    window.location.href = '/Home-Penerima';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat mengirim data');
-                });
-            });
-
-            kembaliButton.addEventListener('click', function() {
-                window.location.href = '/Home';
-            });
-
             const customFileInputs = document.querySelectorAll('.custom-file-input');
             customFileInputs.forEach(input => {
                 input.addEventListener('change', function() {
-                    const label = input.previousElementSibling;
-                    const fileName = input.files[0] ? input.files[0].name : 'Pilih gambar';
-                    label.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> ' + fileName;
+                    const label = input.nextElementSibling;
+                    const fileName = input.files[0] ? input.files[0].name : 'Pilih file';
+                    label.innerHTML = fileName;
                 });
             });
 
@@ -223,34 +170,38 @@
 <body>
     <div class="container">
         <h1>Lengkapi Data Penerima</h1>
-        <form id="penerima-form" action="{{ route('penerima.store') }}" method="POST" enctype="multipart/form-data">
+        <form id="penerima-form" method="POST" action="{{ route('penerima.store') }}" enctype="multipart/form-data">
             @csrf
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Masukkan username anda" required>
-            
-            <label for="nama">Nama lengkap:</label>
-            <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap anda" required>
-            
-            <label for="umur">Umur:</label>
-            <input type="number" id="umur" name="umur" placeholder="Masukkan umur anda" required>
-            
-            <label for="stkm" class="custom-file-label">
-                <i class="fas fa-cloud-upload-alt"></i> STKM (Surat Keterangan Tidak Mampu)
-            </label>
-            <input type="file" id="stkm" name="stkm" class="custom-file-input" accept="image/*" required>
-            
-            <label for="alamat">Alamat tempat tinggal:</label>
-            <input type="text" id="alamat" name="alamat" placeholder="Masukkan alamat" required>
-            
-            <label for="foto" class="custom-file-label photo">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <span>Foto profil</span>
-            </label>
-            <input type="file" id="foto" name="foto" class="custom-file-input" accept="image/*" required>
-            
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama_lengkap" required>
+            </div>
+            <div>
+                <label for="umur">Umur</label>
+                <input type="number" id="umur" name="umur" required>
+            </div>
+            <div>
+                <label for="stkm">STKM Foto</label>
+                <input type="file" id="stkm" name="stkm_foto" class="custom-file-input" required>
+                <label for="stkm" class="custom-file-label">Pilih file</label>
+            </div>
+            <div>
+                <label for="alamat">Alamat</label>
+                <textarea id="alamat" name="alamat" required></textarea>
+            </div>
+            <div>
+                <label for="foto">Foto Profil</label>
+                <input type="file" id="foto" name="foto_profil" class="custom-file-input" required>
+                <label for="foto" class="custom-file-label photo"><i class="fas fa-camera"></i>Pilih foto</label>
+            </div>
             <div class="button-group">
-                <button type="button" id="kembali">Kembali</button>
-                <button type="submit">Lanjut</button>
+                <button type="button" id="kembali" onclick="window.history.back();">Kembali</button>
+                <button type="submit">Simpan</button>
+                
             </div>
         </form>
     </div>
