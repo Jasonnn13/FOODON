@@ -3,6 +3,13 @@
 use App\Http\Controllers\DonaturController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenerimaController;
+use App\Http\Controllers\DonationItemController;
+use App\Http\Controllers\UserController;
+
+Route::post('/check-user-type', [UserController::class, 'checkUserType'])->name('check.user.type');
+
+
+
 
 require __DIR__.'/auth.php'; // Ensure this line is present
 
@@ -36,6 +43,7 @@ Route::get('/Penerima', function () {
 Route::get('/Home-Penerima', function () {
     return view('Penerima.home-pengguna');
 });
+
 Route::get('/Home-Donatur', function () {
     return view('Donatur.home-donatur');
 });
@@ -55,3 +63,4 @@ Route::get('/Signup', function () {
 Route::resource('donatur', DonaturController::class);
 Route::resource('penerima', PenerimaController::class);
 
+Route::get('/Home-Penerima', [DonationItemController::class, 'index']);

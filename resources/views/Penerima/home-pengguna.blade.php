@@ -226,35 +226,20 @@
         <div class="content-container">
             <div class="recommendation-title">
                 <h2>Rekomendasi berdasarkan lokasi:</h2>
-            </div>
+            </div>  
             <div class="product-list">
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p><strong>AEON MALL, Jln blablablabla</strong></p>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
+                @foreach($donationItems as $donationItem)
+                    <div class="product">
+                        <img src="{{ asset($donationItem->foto) }}" alt="{{ $donationItem->nama }}">
+                        <div class="product-info">
+                            <h2>{{ $donationItem->nama }}</h2>
+                            <p><strong>{{ $donationItem->lokasi_pengambilan }}</strong></p>
+                            <p>Best Before: {{ $donationItem->tanggal_kadaluwarsa }}</p>
+                            <p>Stock: {{ $donationItem->jumlah }}</p>
+                            <p>Status: {{ $donationItem->status }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p><strong>AEON MALL, Jln blablablabla</strong></p>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p><strong>AEON MALL, Jln blablablabla</strong></p>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <a href="#" class="see-more">Lihat produk lain</a>
         </div>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('donatur', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->default(0)->constrained()->onDelete('cascade');
             $table->string('nama_perusahaan');
             $table->string('siup_foto')->nullable();
             $table->string('alamat_perusahaan');
