@@ -49,22 +49,11 @@ Route::get('/Home-Donatur', function () {
     return view('Donatur.home-donatur',[
     'posts' => $posts
     ]);
-});
+})->name('home-donatur');
 
 Route::get('/List', function () {
     return view('Donatur.product-list-donatur');
 });
-
-// Route::get('/product-list-donatur', function () {
-//     return view('Donatur.product-list-donatur');
-// })->name('product-list-donatur');
-
-// Route::get('/product-list-donatur', function () {
-//     $posts = DB::table('donation_items')->get();
-//     return view('Donatur.product-list-donatur',[
-//         'posts' => $posts
-//     ]);
-// });
 
 Route::get('/product-list-donatur', function () {
     $posts = DB::table('donation_items')->get();

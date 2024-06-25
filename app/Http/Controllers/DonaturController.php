@@ -56,7 +56,7 @@ class DonaturController extends Controller
     $user->donatur = 1;
     $user->save();
     
-    return redirect()->route('donatur.index')->with('success', 'Donatur created successfully.');
+    return redirect()->route('home-donatur')->with('success', 'Donatur created successfully.');
 }
 
 
