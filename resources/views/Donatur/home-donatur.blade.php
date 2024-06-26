@@ -223,11 +223,11 @@
     <div class="container">
         <div class="profile-section">
             <div class="profile-photo">
-                <img src="profile.jpg" alt="Profile Photo">
+            <img src="{{ asset('storage/' . $donatur->lokasi_foto) }}" alt="{{ $donatur->nama_perusahaan }}">
             </div>
             <div class="profile-info">
-                <h1>Nama Perusahaan</h1>
-                <p>Alamat perusahaan</p>
+                <h1>{{$donatur->nama_perusahaan}}</h1>
+                <p>Alamat : {{$donatur->alamat_perusahaan}}</p>
             </div>
         </div>
         <div class="actions-container">

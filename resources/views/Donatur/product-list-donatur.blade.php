@@ -41,9 +41,10 @@
         }
         .product-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(31.25rem, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(2, 1fr); /* Changed to 2 columns */
+            gap: 2.5rem; /* Adjust spacing between products */
         }
+
         .product {
             display: flex;
             align-items: center;
@@ -51,22 +52,29 @@
             padding: 1.25rem;
             border-radius: 0.625rem;
             position: relative;
+            width: 100%; /* Ensure each product takes full width */
+            max-width: 31.25rem; /* Limit maximum width of each product */
+            margin-bottom: 2.5rem; /* Add margin bottom for spacing */
         }
+
         .product img {
             width: 12.5rem;
             height: 12.5rem;
             border-radius: 0.625rem;
             margin-right: 1.25rem;
         }
+
         .product-info h2 {
             font-size: 2.5rem;
             margin: 0;
             margin-bottom: 0.625rem;
         }
+
         .product-info p {
             margin: 0;
             font-size: 1.8rem;
         }
+
         .product-actions {
             position: absolute;
             bottom: 1rem;
@@ -74,12 +82,14 @@
             display: flex;
             gap: 1.25rem;
         }
+
         .product-actions i {
             font-size: 2rem;
             color: black;
             cursor: pointer;
             transition: transform 0.2s;
         }
+
         .product-actions i:hover {
             transform: scale(1.1);
         }
@@ -138,30 +148,7 @@
                         <i class="fi fi-rr-trash-xmark"></i>
                     </div>
                 </div>
-                <!-- <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit"></i>
-                        <i class="fi fi-rr-trash-xmark"></i>
-                    </div>
-                </div>
-                <div class="product">
-                    <img src="apelfuji.jpg" alt="Apel Fuji">
-                    <div class="product-info">
-                        <h2>Apel Fuji RRC</h2>
-                        <p>Best Before: 21/05/2024</p>
-                        <p>Stock: 153 buah</p>
-                    </div>
-                    <div class="product-actions">
-                        <i class="fi fi-rr-file-edit"></i>
-                        <i class="fi fi-rr-trash-xmark"></i>
-                    </div>
-                </div> -->
+                <!-- Repeat this product structure for each item in $posts -->
             </div>
             @endforeach
         </div>

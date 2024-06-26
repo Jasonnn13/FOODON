@@ -41,13 +41,23 @@ Route::get('/Penerima', function () {
 });
 
 Route::get('/Home-Penerima', function () {
-    return view('Penerima.home-pengguna');
-});
+    $userId = Auth::id();
+    $posts = DB::table('donation_items')->get();
+    $penerima = DB::table('penerima')->where('user_id', $userId)->first();
+    return view('Penerima.Home-Pengguna',[
+    'posts' => $posts,
+    'penerima' => $penerima
+    ]);
+})->name('home-penerima');
+
 
 Route::get('/Home-Donatur', function () {
+    $userId = Auth::id();
     $posts = DB::table('donation_items')->get();
+    $donatur = DB::table('donatur')->where('user_id', $userId)->first();
     return view('Donatur.home-donatur',[
-    'posts' => $posts
+    'posts' => $posts,
+    'donatur' => $donatur
     ]);
 })->name('home-donatur');
 
@@ -79,5 +89,3 @@ Route::get('/Signup', function () {
 
 Route::resource('donatur', DonaturController::class);
 Route::resource('penerima', PenerimaController::class);
-
-Route::get('/Home-Penerima', [DonationItemController::class, 'index']);

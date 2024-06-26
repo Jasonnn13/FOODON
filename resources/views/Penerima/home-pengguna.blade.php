@@ -205,10 +205,10 @@
     <div class="container">
         <div class="profile-section">
             <div class="profile-photo">
-                <img src="profile.jpg" alt="Profile Photo">
+            <img src="{{ asset('storage/' . $penerima->foto_profil) }}" alt="{{ $penerima->nama_lengkap }}">
             </div>
             <div class="profile-info">
-                <h1>Username Pengguna</h1>
+                <h1>{{$penerima->username}}</h1>
                 <p>Lokasi anda saat ini:</p>
                 <p>Lokasi pengguna...</p>
             </div>
@@ -228,14 +228,14 @@
                 <h2>Rekomendasi berdasarkan lokasi:</h2>
             </div>  
             <div class="product-list">
-                @foreach($donationItems as $donationItem)
+                @foreach($posts as $post)
                     <div class="product">
-                        <img src="{{ asset($donationItem->foto) }}" alt="{{ $donationItem->nama }}">
+                        <img src="{{$post->foto}}" alt="{{ $post->nama }}">
                         <div class="product-info">
-                            <h2>{{ $donationItem->nama }}</h2>
-                            <p><strong>{{ $donationItem->lokasi_pengambilan }}</strong></p>
-                            <p>Best Before: {{ $donationItem->tanggal_kadaluwarsa }}</p>
-                            <p>Stock: {{ $donationItem->jumlah }}</p>
+                            <h2>{{ $post->nama }}</h2>
+                            <p><strong>{{ $post->lokasi_pengambilan }}</strong></p>
+                            <p>Best Before: {{ $post->tanggal_kadaluwarsa }}</p>
+                            <p>Stock: {{ $post->jumlah }}</p>
                         </div>
                     </div>
                 @endforeach

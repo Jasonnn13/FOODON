@@ -17,6 +17,7 @@ class DonationItemController extends Controller
 
         // Pass donation items to the view
         return view('Penerima.home-pengguna', compact('donationItems'));
+        return view('Donatur.home-Donatur', compact('donationItems'));
     }
 
     /**
