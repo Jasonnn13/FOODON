@@ -27,22 +27,32 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        // Log out the current user if they are authenticated
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        // Validate the incoming request data
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'nomor' => ['required', 'numeric'],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
+        // Create a new user
         $user = User::create([
             'email' => $request->email,
             'nomor' => $request->nomor,
             'password' => Hash::make($request->password),
         ]);
 
+        // Trigger the registered event
         event(new Registered($user));
 
+        // Log in the newly registered user
         Auth::login($user);
 
+        // Redirect to the home page
         return redirect(RouteServiceProvider::HOME);
     }
 }

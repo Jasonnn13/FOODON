@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Donatur;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class DonaturController extends Controller
 {
@@ -13,8 +14,9 @@ class DonaturController extends Controller
      */
     public function index()
     {
-        $donaturs = Donatur::all();
-        return view('donatur.home-donatur', compact('donaturs'));
+        $userId = Auth::id();
+        $donatur = Donatur::where('user_id', $userId)->first();
+        return view('/Home-Donatur', compact('donatur'));
     }
 
     /**
@@ -56,7 +58,7 @@ class DonaturController extends Controller
     $user->donatur = 1;
     $user->save();
     
-    return redirect()->route('home-donatur')->with('success', 'Donatur created successfully.');
+    return redirect('/Home-Donatur');
 }
 
 

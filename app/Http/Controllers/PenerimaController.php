@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Penerima;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenerimaController extends Controller
 {
@@ -13,8 +14,9 @@ class PenerimaController extends Controller
      */
     public function index()
     {
-        $penerimas = Penerima::all();
-        return view('Penerima.home-pengguna', compact('penerimas'));
+        $userId = Auth::id();
+        $penerima = Penerima::where('user_id', $userId)->first();
+        return view('/Home-Penerima', compact('penerima'));
     }
 
     /**
@@ -59,7 +61,7 @@ class PenerimaController extends Controller
     $user->penerima = 1;
     $user->save();
 
-    return redirect()->route('penerima.index')->with('success', 'Data Penerima created successfully.');
+    return redirect('/Home-Penerima');
 }
 
     /**

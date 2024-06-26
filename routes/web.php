@@ -8,9 +8,6 @@ use App\Http\Controllers\UserController;
 
 Route::post('/check-user-type', [UserController::class, 'checkUserType'])->name('check.user.type');
 
-
-
-
 require __DIR__.'/auth.php'; // Ensure this line is present
 
 /*
@@ -44,7 +41,7 @@ Route::get('/Home-Penerima', function () {
     $userId = Auth::id();
     $posts = DB::table('donation_items')->get();
     $penerima = DB::table('penerima')->where('user_id', $userId)->first();
-    return view('Penerima.Home-Pengguna',[
+    return view('Penerima.home-pengguna',[
     'posts' => $posts,
     'penerima' => $penerima
     ]);
@@ -89,3 +86,9 @@ Route::get('/Signup', function () {
 
 Route::resource('donatur', DonaturController::class);
 Route::resource('penerima', PenerimaController::class);
+
+Route::get('Penerima.home-pengguna', [DonationItemController::class, 'indexPenerima'])->name('home-penerima');
+Route::get('Donatur.home-donatur', [DonationItemController::class, 'indexDonatur'])->name('home-donatur');
+
+
+

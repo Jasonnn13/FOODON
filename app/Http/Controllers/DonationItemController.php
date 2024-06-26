@@ -10,16 +10,26 @@ class DonationItemController extends Controller
     /**
      * Display a listing of the donation items.
      */
-    public function index()
+    public function indexPenerima()
     {
         // Retrieve all donation items
-        $donationItems = DonationItem::all();
+        $posts = DonationItem::all();
 
-        // Pass donation items to the view
-        return view('Penerima.home-pengguna', compact('donationItems'));
-        return view('Donatur.home-Donatur', compact('donationItems'));
+        // Pass donation items to the view for penerima
+        return view('Penerima.home-pengguna', compact('posts'));
     }
 
+    /**
+     * Display a listing of the donation items for donatur.
+     */
+    public function indexDonatur()
+    {
+        // Retrieve all donation items
+        $posts = DonationItem::all();
+
+        // Pass donation items to the view for donatur
+        return view('Donatur.home-Donatur', compact('posts'));
+    }
     /**
      * Store a newly created donation item in storage.
      */
